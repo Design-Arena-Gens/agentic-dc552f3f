@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلام</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 6rem;
+            color: white;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: fadeInScale 1s ease-out;
+            margin-bottom: 2rem;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: rgba(255,255,255,0.9);
+            animation: fadeIn 1.5s ease-out;
+            margin-bottom: 3rem;
+        }
+
+        .time {
+            font-size: 3rem;
+            color: white;
+            font-weight: 300;
+            margin-top: 2rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .circles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        .circle:nth-child(5) {
+            width: 90px;
+            height: 90px;
+            left: 20%;
+            animation-delay: 8s;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: fadeIn 2.5s ease-out;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="container">
+        <h1>سلام! 👋</h1>
+        <p class="subtitle">خوش آمدید</p>
+        <div class="time" id="time"></div>
+        <button onclick="changeGreeting()">تغییر پیام</button>
+    </div>
+
+    <script>
+        const greetings = [
+            'سلام! 👋',
+            'درود! 🌟',
+            'علیک سلام! ✨',
+            'خوش آمدید! 🎉',
+            'صلح و درود! 🕊️',
+            'به به! 😊'
+        ];
+
+        let currentIndex = 0;
+
+        function changeGreeting() {
+            currentIndex = (currentIndex + 1) % greetings.length;
+            document.querySelector('h1').style.animation = 'none';
+            setTimeout(() => {
+                document.querySelector('h1').textContent = greetings[currentIndex];
+                document.querySelector('h1').style.animation = 'fadeInScale 0.5s ease-out';
+            }, 10);
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const options = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            document.getElementById('time').textContent = now.toLocaleTimeString('fa-IR', options);
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
